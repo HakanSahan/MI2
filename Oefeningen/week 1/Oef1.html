@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Oef 1 week 1</title>
+</head>
+
+<body>
+    <h1>Oef 1</h1>
+</body>
+<script type="text/javascript">
+    "use strict";
+    var getallen = [];
+    function Telop(getal1, getal2) {
+        getallen.push(getal1+getal2);
+        return getal1 + getal2;
+    }
+    function Trekaf(getal1, getal2) {
+         getallen.push(getal1-getal2);
+        return getal1 - getal2;
+    }
+    function Vermenigvuldig(getal1, getal2){
+         getallen.push(getal1*getal2);
+        return getal1 * getal2;
+    }
+    function Deel(getal1,getal2){
+         getallen.push(getal1/getal2);
+        return getal1 / getal2
+    }
+    function RekenMachine(getal1, getal2, teken) {
+        if (teken === '+'){
+            console.log(Telop(getal1,getal2));
+        }
+        else if (teken === '-'){
+            console.log(Trekaf(getal1,getal2));
+        }
+        else if (teken === '*'){
+            console.log(Vermenigvuldig(getal1,getal2));
+        }
+        else if (teken === '/'){
+            console.log(Deel(getal1,getal2));
+        }
+        else {
+            console.log('Fout');
+        }    
+    }
+</script>
+</html>
