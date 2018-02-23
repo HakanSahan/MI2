@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Oef 6</title>
+</head>
+
+<body>
+    <h1>Priemgetallen</h1>
+    <p id="reeks getallen"></p>
+    <script>
+        "use strict";
+        var getallen = [];
+        var count = 0;
+        var i;
+        var j;
+        for (i = 0; i <= 100000; ++i) {
+            count = 0;
+            for (j = 0; j <= i; ++j) {
+                if (i % j == 0) {
+                    count++
+                }
+            }
+            if (count == 2) {
+                getallen.push(i);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

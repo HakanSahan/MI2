@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Oef 5</title>
+    <style>
+        body {
+            background-color: aquamarine;
+            overflow: auto;
+            width: 500px;
+        }
+        .zBlokje,
+        .wBlokje
+        {
+            height: 50px;
+            width: 50px;
+            float: left;
+        }
+
+        .zBlokje {
+            background-color: black;
+        }
+
+        .wBlokje {
+            background-color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Dambord</h1>
+    <!--
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+    <br>
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+    <div class="zBlokje"></div>
+    <div class="wBlokje"></div>
+-->
+    
+</body>
+<script> 
+    "use strict";
+    for (var i = 0; i < 10; i++) {
+        if(i % 2 == 0){
+            blokjes1();
+        }
+        else {
+            blokjes2();
+        }
+        document.body.innerHTML += "<br>"
+    } 
+    function blokjes1() {
+        for (var j = 0; j < 10; j++) {
+            if (j % 2 == 0) {
+                document.body.innerHTML += "<div class=\"zBlokje\"></div>";
+            }
+            else {
+                document.body.innerHTML += "<div class=\"wBlokje\"></div>";
+            }
+        }
+    }
+    function blokjes2() {
+        for (var j = 0; j < 10; j++) {
+            if (j % 2 == 1) {
+                document.body.innerHTML += "<div class=\"zBlokje\"></div>";
+            }
+            else {
+                document.body.innerHTML += "<div class=\"wBlokje\"></div>";
+            }
+        }
+    }
+</script>
+
+</html>
