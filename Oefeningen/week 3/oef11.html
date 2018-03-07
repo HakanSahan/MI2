@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Oef 11</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        header {
+            background-color: darkgreen;
+            padding: 5vh;
+        }
+
+        h1 {
+            color: white;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("header").hide();
+            $("p").hide();
+            $("#testButton").hide();
+        })
+        var count = 0;
+        $(document).ready(function() {
+            $("#Peek-A-Boo").click(function() {
+                if (count == 0) {
+                    $("header").show();
+                    $("p").show();
+                    $("#testButton").show();
+                    count = 1;
+                } else {
+                    $("header").fadeOut(7000);
+                    $("p").fadeOut(7000);
+                    $("#testButton").fadeOut(7000);
+                    count = 0;
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Oefening 11</h1>
+    </header>
+    <p>How could you forget a thing like your hat? Would you like some water? Yeah, thanks. (Maggie pours him a glass of very dirty water. Marty just stares at it.) I'll tell you what I'll do, Mr. Eastwood. I'll help you find your blacksmith friend. You can stay the night in the barn. And tomorrow, I'll take you as far as the railroad tracks...you can follow them straight on in into town. I'll even give you a hat. (Maggie slams down plate at the kitchen counter, and crosses herself in the Catholic fashion.) That's great. Thanks.What about the locomotive? Grinning. It'll be a spectacular wreck. Too bad no one will be around to see it. (os) Ahhh!! help me! (Doc turns around and spots a woman on a buckboard that's gone out of control. He jumps on his horse.) Great Scott! (he takes off after her) Git!</p>
+    <button id="testButton">Button</button>
+    <button id="Peek-A-Boo">Peek-A-Boo</button>
+</body>
+</html>
