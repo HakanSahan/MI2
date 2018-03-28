@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Oef 13</title>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>
+            $.ajax({
+                type:"GET",
+                url:"http://ophalvens.net/mi2/les7/json/adres-2.json.php",
+                dataType:'json',
+                success:mijnWoonplaats
+            });
+            function mijnWoonplaats(response){
+                var adres = response.results[0];
+                $("#plaats").text(adres.formatted_address);
+                $("#ing").text(adres.geometry.location.lng);
+                $("#lat").text(adres.geometry.location.lat);
+            }
+        </script>
+    </head>
+    <body>
+        <table>
+            <thead>
+            <tr><th>Plaats</th><th>Lat</th><th>Lng</th></tr>
+                <tr><td id="plaats"></td><td id="lat"></td><td id="ing"></td></tr>
+            </thead>
+        </table>
+    </body>
+</html>

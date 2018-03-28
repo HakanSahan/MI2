@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Project test v0.1</title>
+    <script src="js/js/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function() {
+            $.ajax({
+                type: "GET",
+                url: "https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_INTRADAY&symbol=BTC&market=EUR&apikey=JT4HOLZGX0B3X80C",
+                dataType: "json",
+                success: price
+            });
+
+            function price(response) {
+
+                // var prijs = response."Time Series (Digital Currency Intraday)"[0];
+                console.log("success");
+
+            }
+        });
+    </script>
+</head>
+
+<body>
+</body>
+</html>

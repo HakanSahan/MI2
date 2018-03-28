@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title> Oef 15</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#zoek").click(function() {
+               var artiest = document.getElementById("artiesten").value;
+                var request = new XMLHttpRequest();
+                request.open('GET','http://www.songsterr.com/a/ra/songs/byartists.json?artists=' + artiest);
+                request.onload = function (){
+                    var lied = "";
+                    $('#liedjes').html(lied);
+                    {
+                        var info = JSON.parse(request.responseText);
+                        for(i = 0; i < info.length ; i++){
+                            lied += '<tr><td>' + info[i].title + '</td></tr>';
+                        }
+                        $('#liedjes').html(lied);
+                    }
+                };
+                request.send();
+            });
+            $("tableSelector")delegate("tr","click",function (){
+                console.log("Click")
+            });
+     });
+    </script>
+</head>
+
+<body>
+    <input type="text" id="artiesten" placeholder="artiest">
+    <button id="zoek">Zoek</button>
+    <table id="liedjes"></table>
+</body>
+</html>
