@@ -10,7 +10,7 @@
     <p id="reeks getallen"></p>
     <script>
         "use strict";
-        var getallen = [];
+        var getallen = new Set();
         var count = 0;
         var i;
         var j;
@@ -21,10 +21,9 @@
                 if (i % j == 0) {
                     break;
                 }
-                
             }
             if (count == (i-1)) {
-                getallen.push(i);
+                getallen.add(i);
             }
         }
 

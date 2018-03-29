@@ -1,0 +1,6 @@
+JT4HOLZGX0B3X80C
+
+https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_INTRADAY&symbol=BTC&market=EUR&apikey=JT4HOLZGX0B3X80C
+
+Cordova
+
