@@ -24,12 +24,17 @@ var CBA = {price: 5, name: "CBA"};
 var BAC = {price: 150, name: "BAC"};
 var CYC = {price: 200, name: "CYC"};
 
-// var crypto = [BTC,ABC,CBA,BAC,CYC];
+var cryptoLijst = [];
+cryptoLijst.push(BTC);
+cryptoLijst.push(ABC);
+cryptoLijst.push(CBA);
+cryptoLijst.push(BAC);
+cryptoLijst.push(CYC);
 var gekochtCryptoLijst = [];
 
 function KoopCyrpto(aantal , cryptoKopen)
 {
-    var amount = cryptoKopen.price *aantal;
+    var amount = cryptoKopen.price * aantal;
     if (wallet >= amount) {
         var index = FindIndex(gekochtCryptoLijst, cryptoKopen.name);
         if (index !== -1) {
@@ -50,14 +55,16 @@ function VerkoopCrypto(aantal, cryptoVerkopen){
         if (gekochtCryptoLijst[index].aantal >= aantal){
             wallet += cryptoVerkopen.price * aantal;
             gekochtCryptoLijst[index].aantal = gekochtCryptoLijst[index].aantal - aantal;
-            if(gekochtCryptoLijst[index].aantal === 0){
-                gekochtCryptoLijst = gekochtCryptoLijst.splice(index,1);
+            if(gekochtCryptoLijst[index].aantal < 1){
+                gekochtCryptoLijst.splice(index,1);
+                console.log("test1");
+
             }
         }
         else {
-            console.log("Not enough crypto")
+            console.log("Not enough crypto");
+            return;
         }
-
     }
     else {
         console.log("You do not own that crypto")

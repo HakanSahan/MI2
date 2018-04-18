@@ -6,42 +6,62 @@
     <script>
         "use strict";
         $(document).ready(function () {
+            UpdateWallet();
+            function UpdateOwnedCrypto() {
+                var crypto = "";
+                for(var i =0; i<gekochtCryptoLijst.length;i++){
+                    crypto += "<div class='OwendCryptoRow'><div>" + gekochtCryptoLijst[i].name + "</div>" + "<div>" + gekochtCryptoLijst[i].aantal + "</div></div>";
+                    crypto += "<div class='cryptoRow2'><button class='btnVerkoop'>Verkoop</button><input type='number' class='aantalVerkoop'></div>";
+                }
+                $("#OwendCrypto").html(crypto);
+            }
             var crypto = "";
-            updateWallet();
             $("#AvCrypto").html(crypto);
             {
-                crypto += "<div>" + BTC.name + "</div>" + "<div>" + BTC.price + "</div>";
+                for(var i = 0; i< cryptoLijst.length; i++){
+                    crypto += "<div class='cryptoRow'><div>" + cryptoLijst[i].name + "</div>" + "<div>" + cryptoLijst[i].price + "</div></div>";
+                    crypto+= "<div class='cryptoRow2'><button class='btnKoop'>Koop</button><input type='number' id='aantalKoop"+ i +"' ></div>";
+                }
                 $("#AvCrypto").html(crypto);
             }
-            $("#AvCrypto").click(function () {
-                $("#btn").slideToggle("slow");
+
+            $(".cryptoRow").click(function () {
+                $(".btnKoop").slideToggle("slow");
             });
-            $("#btn").click(function () {
-                var crypto = "<div>" + BTC.name +"</div>";
-                wallet -= BTC.price;
-                updateWallet();
-                $("#OwendCrypto").html(crypto);
+            $(".btnKoop").click(function () {
+                var aantal = document.getElementById("aantalKoop0").value;
+                KoopCyrpto(aantal,BTC);
+                UpdateOwnedCrypto();
+                UpdateWallet();
             });
-            function updateWallet() {
-                $("#wallet").html(wallet);
+            function UpdateWallet() {
+                var geld = wallet.toString();
+                $("#Wallet").html(geld);
             }
-            $("#OwendCrypto").click(function () {
-                $("#btnSell").slideToggle();
+            $(".OwendCryptoRow").click(function () {
+                $(".btnVerkoop").slideToggle();
             });
-            $("#btnSell").click(function () {
-                var crypto = "";
-                $("#OwendCrypto").html(crypto);
+            $("#idTest").click(function () {
+                VerkoopCrypto(10,BTC);
+                UpdateOwnedCrypto();
+                UpdateWallet();
             });
         });
     </script>
     <style>
         #OwendCrypto{
             background-color: firebrick;
+            display: flex;
+            flex-flow: column;
         }
         #AvCrypto {
             display: flex;
-            width: 90vw;
             background-color:green;
+            flex-flow: column;
+        }
+       .cryptoRow2, .OwendCryptoRow, .cryptoRow{
+            display: flex;
+            justify-items: stretch;
         }
         div {
             flex-grow: 1;
@@ -51,8 +71,7 @@
 <body>
     <div id="Wallet"></div>
     <div id="OwendCrypto"></div>
-    <div id="btnSell"><button>Press me</button></div>
-    <div id="AvCrypto"></div>
-<div id="btn"><button>Press me</button></div>
+    <div id="AvCrypto">
+    </div>
 </body>
 </html>
