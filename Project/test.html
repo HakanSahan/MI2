@@ -20,16 +20,17 @@
             {
                 for(var i = 0; i< cryptoLijst.length; i++){
                     crypto += "<div class='cryptoRow'><div>" + cryptoLijst[i].name + "</div>" + "<div>" + cryptoLijst[i].price + "</div></div>";
-                    crypto+= "<div class='cryptoRow2'><button class='btnKoop'>Koop</button><input type='number' id='aantalKoop"+ i +"' ></div>";
+                    crypto+= "<div class='cryptoRow2'><button class='btnKoop'>Koop</button><input type='number' class='aantalKoop' id='aantalKoop"+ i +"' ></div>";
                 }
                 $("#AvCrypto").html(crypto);
             }
 
             $(".cryptoRow").click(function () {
-                $(".btnKoop").slideToggle("slow");
+                $(".btnKoop").slideToggle();
+                $(".aantalKoop").slideToggle();
             });
             $(".btnKoop").click(function () {
-                var aantal = document.getElementById("aantalKoop0").value;
+                var aantal = parseInt(document.getElementById("aantalKoop0").value);
                 KoopCyrpto(aantal,BTC);
                 UpdateOwnedCrypto();
                 UpdateWallet();
@@ -40,8 +41,9 @@
             }
             $(".OwendCryptoRow").click(function () {
                 $(".btnVerkoop").slideToggle();
+                $(".aantalVerkoop").slideToggle();
             });
-            $("#idTest").click(function () {
+            $(".btnVerkoop").click(function () {
                 VerkoopCrypto(10,BTC);
                 UpdateOwnedCrypto();
                 UpdateWallet();

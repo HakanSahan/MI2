@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title> Oef 17</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/Oef17.js"></script>
+    <script>
+        $(document).ready(function () {
+           $("button").click(function(){
+               let naam = $("#naam").val();
+               let nummer = parseInt($("#nummer").val());
+               bewaar(naam,nummer);
+               updateDiv();
+           });
+        function updateDiv(){
+            let text = "";
+            let info = JSON.parse(localStorage.ik);
+            text += "<div>" + info.naam + " " + info.nummer +"</div>";
+            $("div").html(text);
+        }
+        
+     });
+    </script>
+</head>
+
+<body>
+    <input id="naam" type="text">
+    <input id="nummer" type="number">
+    <button>Voeg toe</button>
+    <div></div>
+</body>
+</html>

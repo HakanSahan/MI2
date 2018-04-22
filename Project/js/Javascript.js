@@ -54,7 +54,7 @@ function VerkoopCrypto(aantal, cryptoVerkopen){
     if (index !== -1) {
         if (gekochtCryptoLijst[index].aantal >= aantal){
             wallet += cryptoVerkopen.price * aantal;
-            gekochtCryptoLijst[index].aantal = gekochtCryptoLijst[index].aantal - aantal;
+            gekochtCryptoLijst[index].aantal = (gekochtCryptoLijst[index].aantal - aantal);
             if(gekochtCryptoLijst[index].aantal < 1){
                 gekochtCryptoLijst.splice(index,1);
                 console.log("test1");
