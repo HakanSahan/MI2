@@ -7,15 +7,19 @@
     <script>
         $(document).ready(function () {
            $("button").click(function(){
-               let naam = $("#naam").val();
-               let nummer = parseInt($("#nummer").val());
-               bewaar(naam,nummer);
-               updateDiv();
+                x = $("#bday").val();
+                let bday2 = $("#bday").val();
+                let naam = $("#naam").val();
+                bewaar(naam,bday2);
+                updateDiv();
            });
         function updateDiv(){
+            let date = new Date();
             let text = "";
             let info = JSON.parse(localStorage.ik);
-            text += "<div>" + info.naam + " " + info.nummer +"</div>";
+            for(let i =0; i < info.length; i++){
+                text += "<div>" + info[i].naam + " " + (date.getFullYear() - new Date(info[i].bday).getFullYear()) +"</div>";
+            }
             $("div").html(text);
         }
         
@@ -25,7 +29,7 @@
 
 <body>
     <input id="naam" type="text">
-    <input id="nummer" type="number">
+    <input id="bday" type="date">
     <button>Voeg toe</button>
     <div></div>
 </body>
