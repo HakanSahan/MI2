@@ -1,3 +1,15 @@
+<!--
+TO DO:
+
+- Niet alleen BTC selecteren maar ook andere coins
+- Owned crypto fixen
+- Crypto lijst laden na uitvoeren ajax
+- F7 gebruiken
+- Alles lokaal opslaan
+- inlog en registratie systeem maken
+- fout meldingen tonen
+
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +20,7 @@
         $(document).ready(function () {
             UpdateWallet();
             function UpdateOwnedCrypto() {
-                var crypto = "";
+                let crypto ="";
                 for(var i =0; i<gekochtCryptoLijst.length;i++){
                     crypto += "<div class='OwendCryptoRow'><div>" + gekochtCryptoLijst[i].name + "</div>" + "<div>" + gekochtCryptoLijst[i].aantal + "</div></div>";
                     crypto += "<div class='cryptoRow2'><button class='btnVerkoop'>Verkoop</button><input type='number' class='aantalVerkoop'></div>";
@@ -16,15 +28,13 @@
                 $("#OwendCrypto").html(crypto);
             }
             var crypto = "";
-            $("#AvCrypto").html(crypto);
-            {
+            function UpdateCrypto() {
                 for(var i = 0; i< cryptoLijst.length; i++){
-                    crypto += "<div class='cryptoRow'><div>" + cryptoLijst[i].name + "</div>" + "<div>" + cryptoLijst[i].price + "</div></div>";
-                    crypto+= "<div class='cryptoRow2'><button class='btnKoop'>Koop</button><input type='number' class='aantalKoop' id='aantalKoop"+ i +"' ></div>";
+                    crypto += "<div class='cryptoRow'><div>" + cryptoLijst[i].symbol + "</div>" + "<div>" + cryptoLijst[i].price_eur + "</div></div>";
+                    crypto += "<div class='cryptoRow2'><button class='btnKoop'>Koop</button><input type='number' class='aantalKoop' id='aantalKoop"+ i +"' ></div>";
                 }
                 $("#AvCrypto").html(crypto);
             }
-
             $(".cryptoRow").click(function () {
                 $(".btnKoop").slideToggle();
                 $(".aantalKoop").slideToggle();
@@ -48,12 +58,13 @@
                 UpdateOwnedCrypto();
                 UpdateWallet();
             });
+            UpdateCrypto();
         });
     </script>
     <style>
         #OwendCrypto{
-            background-color: firebrick;
             display: flex;
+            background-color: firebrick;
             flex-flow: column;
         }
         #AvCrypto {
@@ -72,8 +83,9 @@
 </head>
 <body>
     <div id="Wallet"></div>
-    <div id="OwendCrypto"></div>
     <div id="AvCrypto">
+    </div>
+    <div id="OwendCrypto">
     </div>
 </body>
 </html>
