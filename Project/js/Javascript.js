@@ -1,19 +1,17 @@
 "use strict";
-var wallet = 100000;
-var request = new XMLHttpRequest();
-request.open('GET','https://api.coinmarketcap.com/v1/ticker/?convert=EUR&limit=50');
-request.onload = function () {
-    console.log("You did it");
-    var crypto = JSON.parse(request.responseText);
-    for(var i =0; i <= 49; i++){
-        cryptoLijst.push(crypto[i]);
-    }
-    console.log("You did it again");
-};
-request.send();
-
+var wallet;
 var cryptoLijst = [];
 var gekochtCryptoLijst = [];
+
+if(localStorage.Wallet.length > 0){
+    wallet = JSON.parse(localStorage.Wallet);
+}
+else {
+    wallet = 100000;
+}
+if (localStorage.gekochtCryptoLijst.length > 0){
+    gekochtCryptoLijst = JSON.parse(localStorage.gekochtCryptoLijst);
+}
 
 function KoopCyrpto(aantal , cryptoKopen)
 {
@@ -27,6 +25,7 @@ function KoopCyrpto(aantal , cryptoKopen)
             gekochtCryptoLijst.push({aantal: aantal, id: cryptoKopen.id});
         }
         wallet -= cryptoKopen.price_eur * aantal;
+        localStorage.gekochtCryptoLijst = JSON.stringify(gekochtCryptoLijst);
     }
     else {
         console.log("Not enough funds");
@@ -42,6 +41,7 @@ function VerkoopCrypto(aantal, cryptoVerkopen){
             if(gekochtCryptoLijst[index].aantal < 1){
                 gekochtCryptoLijst.splice(index,1);
             }
+            localStorage.gekochtCryptoLijst = JSON.stringify(gekochtCryptoLijst);
         }
         else {
             console.log("Not enough crypto");
@@ -68,4 +68,3 @@ function FindIndex(array, name){
     }
     return -1;
 }
-$("div").html("HEY");

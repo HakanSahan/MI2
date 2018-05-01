@@ -1,13 +1,10 @@
 <!--
 TO DO:
 
-- Niet alleen BTC selecteren maar ook andere coins
-- Owned crypto fixen
-- Crypto lijst laden na uitvoeren ajax
 - F7 gebruiken
-- Alles lokaal opslaan
-- inlog en registratie systeem maken
+- Winst Verlies tonen
 - fout meldingen tonen
+- inlog syteem maken
 
 -->
 <!DOCTYPE html>
@@ -19,46 +16,57 @@ TO DO:
         "use strict";
         $(document).ready(function () {
             UpdateWallet();
+            UpdateOwnedCrypto();
+            var request = new XMLHttpRequest();
+            request.open('GET','https://api.coinmarketcap.com/v1/ticker/?convert=EUR&limit=50');
+            request.onload = function () {
+                var crypto = JSON.parse(request.responseText);
+                var cryptoAv = "";
+                for(var i =0; i <= 49; i++){
+                    cryptoLijst.push(crypto[i]);
+                    cryptoAv += "<li class='cryptoRow'><div>" + cryptoLijst[i].symbol + "</div>" + "<div>" + cryptoLijst[i].price_eur + "</div></li>";
+                    cryptoAv += "<li class='cryptoRow2'><button class='btnKoop'>Koop</button><input type='number' class='aantalKoop'></li>";
+                }
+                $("#CryptoAv").html(cryptoAv);
+            };
+            request.send();
             function UpdateOwnedCrypto() {
-                let crypto ="";
+                var cryptoOwn ="";
                 for(var i =0; i<gekochtCryptoLijst.length;i++){
-                    crypto += "<div class='OwendCryptoRow'><div>" + gekochtCryptoLijst[i].name + "</div>" + "<div>" + gekochtCryptoLijst[i].aantal + "</div></div>";
-                    crypto += "<div class='cryptoRow2'><button class='btnVerkoop'>Verkoop</button><input type='number' class='aantalVerkoop'></div>";
+                    cryptoOwn += "<li class='OwendCryptoRow'><div>" + gekochtCryptoLijst[i].id + "</div>" + "<div>" + gekochtCryptoLijst[i].aantal + "</div></li>";
+                    cryptoOwn += "<li class='OwendcryptoRow2'><button class='btnVerkoop'>Verkoop</button><input type='number' class='aantalVerkoop'></li>";
                 }
-                $("#OwendCrypto").html(crypto);
+                $("#OwendCrypto").html(cryptoOwn);
             }
-            var crypto = "";
-            function UpdateCrypto() {
-                for(var i = 0; i< cryptoLijst.length; i++){
-                    crypto += "<div class='cryptoRow'><div>" + cryptoLijst[i].symbol + "</div>" + "<div>" + cryptoLijst[i].price_eur + "</div></div>";
-                    crypto += "<div class='cryptoRow2'><button class='btnKoop'>Koop</button><input type='number' class='aantalKoop' id='aantalKoop"+ i +"' ></div>";
-                }
-                $("#AvCrypto").html(crypto);
-            }
-            $(".cryptoRow").click(function () {
-                $(".btnKoop").slideToggle();
-                $(".aantalKoop").slideToggle();
+            $("#CryptoAv").on('click', ".cryptoRow", function () {
+                var index = $(".cryptoRow").index(this);
+                console.log(index);
+                $(".cryptoRow2").eq(index).slideToggle();
             });
-            $(".btnKoop").click(function () {
-                var aantal = parseInt(document.getElementById("aantalKoop0").value);
-                KoopCyrpto(aantal,BTC);
+            $("#CryptoAv").on('click', ".btnKoop", function () {
+                var index = $(".btnKoop").index(this);
+                var aantal = parseInt($(".aantalKoop").eq(index).val());
+                KoopCyrpto(aantal,cryptoLijst[index]);
                 UpdateOwnedCrypto();
                 UpdateWallet();
             });
             function UpdateWallet() {
-                var geld = wallet.toString();
-                $("#Wallet").html(geld);
+                localStorage.Wallet = JSON.stringify(wallet);
+                $("#Wallet").html(wallet.toString());
             }
-            $(".OwendCryptoRow").click(function () {
-                $(".btnVerkoop").slideToggle();
-                $(".aantalVerkoop").slideToggle();
+            $("#OwendCrypto").on('click', ".OwendCryptoRow", function () {
+                var index = $(".OwendCryptoRow").index(this);
+                $(".OwendcryptoRow2").eq(index).slideToggle();
             });
-            $(".btnVerkoop").click(function () {
-                VerkoopCrypto(10,BTC);
+
+            $("#OwendCrypto").on('click', ".btnVerkoop", function () {
+                var index = $(".btnVerkoop").index(this);
+                console.log(index);
+                var aantal = parseInt($(".aantalVerkoop").eq(index).val());
+                VerkoopCrypto(aantal,gekochtCryptoLijst[index]);
                 UpdateOwnedCrypto();
                 UpdateWallet();
             });
-            UpdateCrypto();
         });
     </script>
     <style>
@@ -67,7 +75,7 @@ TO DO:
             background-color: firebrick;
             flex-flow: column;
         }
-        #AvCrypto {
+        #CryptoAv {
             display: flex;
             background-color:green;
             flex-flow: column;
@@ -83,9 +91,9 @@ TO DO:
 </head>
 <body>
     <div id="Wallet"></div>
-    <div id="AvCrypto">
-    </div>
-    <div id="OwendCrypto">
-    </div>
+    <ul id="OwendCrypto">
+    </ul>
+    <ul id="CryptoAv">
+    </ul>
 </body>
 </html>
