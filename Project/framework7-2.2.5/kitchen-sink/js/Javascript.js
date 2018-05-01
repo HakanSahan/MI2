@@ -3,13 +3,13 @@ var wallet;
 var cryptoList = [];
 var ownedCryptoList = [];
 
-if(localStorage.Wallet !== null || localStorage.Wallet !=='undefined'){
+if(localStorage.Wallet){
     wallet = JSON.parse(localStorage.Wallet);
 }
 else {
     wallet = 100000;
 }
-if (localStorage.ownedCryptoList !== null || localStorage.Wallet !=='undefined'){
+if (localStorage.ownedCryptoList){
     ownedCryptoList = JSON.parse(localStorage.ownedCryptoList);
 }
 

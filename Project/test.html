@@ -1,10 +1,9 @@
 <!--
 TO DO:
 
-- F7 gebruiken
-- Winst Verlies tonen
 - fout meldingen tonen
 - inlog syteem maken
+- fix f7 index probleem
 
 -->
 <!DOCTYPE html>
@@ -24,7 +23,7 @@ TO DO:
                 var cryptoAv = "";
                 for(var i =0; i <= 49; i++){
                     cryptoLijst.push(crypto[i]);
-                    cryptoAv += "<li class='cryptoRow'><div>" + cryptoLijst[i].symbol + "</div>" + "<div>" + cryptoLijst[i].price_eur + "</div></li>";
+                    cryptoAv += "<li class='cryptoRow'><div>" + cryptoLijst[i].symbol + "</div>" + "<div>" + (cryptoLijst[i].price_eur).toFixed(2) + "</div></li>";
                     cryptoAv += "<li class='cryptoRow2'><button class='btnKoop'>Koop</button><input type='number' class='aantalKoop'></li>";
                 }
                 $("#CryptoAv").html(cryptoAv);

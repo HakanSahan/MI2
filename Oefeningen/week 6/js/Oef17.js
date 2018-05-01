@@ -1,6 +1,6 @@
 "use strict";
 function bewaar(naam, bday){
-    let persoon = {
+    var persoon = {
         "naam":naam,
         "bday":new Date(bday)
     };
