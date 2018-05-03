@@ -1,0 +1,45 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">Back</span>
+        </a>
+      </div>
+      <div class="title">Gebruiker info</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="list inline-labels no-hairlines-md">
+      <ul>
+        <li class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-label item-title">Naam</div>
+              <div class="item-input-wrap">
+                <input type="text" placeholder="uw naam" id="naam">
+              </div>
+            </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-label item-title">Verjaardag</div>
+            <div class="item-input-wrap">
+              <input type="date" id="datum">
+            </div>
+          </div>
+        </li>
+      </ul>
+              <button class="col button button-fill" id="btn" onclick="save()">Voeg toe</button>
+    </div>
+    <script>
+      function save () {
+        console.log("You did it");
+        var naam = $('#naam').val();
+        var datum = $("#datum").val();
+        localStorage.gebruiker = JSON.stringify({naam:naam,datum:datum});
+      };
+    </script>
+  </div>
+</div>
+
