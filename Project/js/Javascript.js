@@ -3,35 +3,41 @@ var wallet;
 var cryptoList = [];
 var ownedCryptoList = [];
 
-if(localStorage.Wallet !== null || localStorage.Wallet !=='undefined'){
+if(localStorage.Wallet){
     wallet = JSON.parse(localStorage.Wallet);
 }
 else {
     wallet = 100000;
 }
-if (localStorage.ownedCryptoList !== null || localStorage.Wallet !=='undefined'){
+if (localStorage.ownedCryptoList){
     ownedCryptoList = JSON.parse(localStorage.ownedCryptoList);
 }
 
 function BuyCyrpto(amount , cryptoBuy)
 {
-    var worth = cryptoBuy.price_eur * amount;
-    if (wallet >= worth) {
-        var index = FindIndex(ownedCryptoList, cryptoBuy.id);
-        if (index !== -1) {
-            ownedCryptoList[index].amount += amount;
+    if(amount !== 0 && amount) {
+        var worth = cryptoBuy.price_eur * amount;
+        if (wallet >= worth) {
+            var index = FindIndex(ownedCryptoList, cryptoBuy.id);
+            if (index !== -1) {
+                ownedCryptoList[index].amount += amount;
+            }
+            else {
+                ownedCryptoList.push({amount: amount, id: cryptoBuy.id, price: cryptoBuy.price_eur});
+            }
+            wallet -= worth;
+            localStorage.ownedCryptoList = JSON.stringify(ownedCryptoList);
         }
         else {
-            ownedCryptoList.push({amount: amount, id: cryptoBuy.id, price:cryptoBuy.price_eur});
+            return "Not enough funds";
         }
-        wallet -= worth;
-        localStorage.ownedCryptoList = JSON.stringify(ownedCryptoList);
     }
     else {
-        console.log("Not enough funds");
+        return "Amount cannot be empty or 0";
     }
 }
 function SellCrypto(amount, cryptoSell){
+    if(amount !== 0 && amount){
     var index = FindIndex(ownedCryptoList, cryptoSell.id);
     if (index !== -1) {
         if (ownedCryptoList[index].amount >= amount){
@@ -44,13 +50,15 @@ function SellCrypto(amount, cryptoSell){
             localStorage.ownedCryptoList = JSON.stringify(ownedCryptoList);
         }
         else {
-            console.log("Not enough crypto");
             return "Not enough crypto";
         }
     }
     else {
-        console.log("You do not own that crypto")
-        return "Not enough crypto";
+        return "You do not own that crypto";
+    }
+    }
+    else {
+        return "Amount cannot be empty or 0";
     }
 }
 
@@ -75,7 +83,7 @@ function CalculateTotalWorth() {
   return totalWorth;
 }
 function CalculateTotalProfit() {
-  return (CalculateTotalWorth() - 100000)/100000;
+  return ((CalculateTotalWorth() - 100000)/100000)*100;
 }
 function FindIndex(array, name){
     var i;
