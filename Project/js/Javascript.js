@@ -33,7 +33,7 @@ function BuyCyrpto(amount , cryptoBuy)
         }
     }
     else {
-        return "Amount cannot be empty or 0";
+        return "Amount cannot be empty or less than 1";
     }
 }
 function SellCrypto(amount, cryptoSell){

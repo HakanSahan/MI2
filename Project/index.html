@@ -81,7 +81,7 @@
       $("#CryptoAv").on('click', ".btnBuy", function () {
         var id = $(this).attr('id');
         var index = id.substr(6);
-        var amount = parseInt($(".amountBuy").eq(index).val());
+        var amount = Math.abs(parseInt($(".amountBuy").eq(index).val()));
         showToastCenter(BuyCyrpto(amount,cryptoList[index]));
         UpdateOwnedCrypto();
         UpdateWallet();
