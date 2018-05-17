@@ -33,7 +33,7 @@ function BuyCyrpto(amount , cryptoBuy)
         }
     }
     else {
-        return "Amount cannot be empty or less than 1";
+        return "Amount is invalid";
     }
 }
 function SellCrypto(amount, cryptoSell){
@@ -58,7 +58,7 @@ function SellCrypto(amount, cryptoSell){
     }
     }
     else {
-        return "Amount cannot be empty or 0";
+        return "Amount is invalid";
     }
 }
 
